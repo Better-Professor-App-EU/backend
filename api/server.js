@@ -19,4 +19,7 @@ server.get('/', (req, res) => {
   res.send("<h2>We're in business!<h2>");
 });
 
+const bcrypt = require('bcryptjs');
+console.log(bcrypt.compareSync('$2a$10$qxy7IRMtrS51kl9Rh.w4fOJvTyAJwH5jXRzQNbbCRAkZ7ydTqgml2', "1234"));
+
 module.exports = server;

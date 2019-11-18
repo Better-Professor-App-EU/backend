@@ -4,9 +4,11 @@
   "description": "Unit 4 BW",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js",
+    "server": "cross-env NODE_ENV=development nodemon index.js",
     "test": "cross-env DB_ENV=testing jest --watchAll",
-    "start": "node index.js"
+    "start": "cross-env NODE_ENV=production node index.js",
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run"
   },
   "repository": {
     "type": "git",

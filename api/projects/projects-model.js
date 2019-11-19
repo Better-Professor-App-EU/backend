@@ -3,19 +3,30 @@ const db = require('../../config/db-config');
 module.exports = {
   find,
   findById,
+  findDeadlines,
+  findDeadlinesById,
   add,
   remove
 }
 
 function find() {
-  return db('Projects AS p')
-    .join('ProjetsToDeadlines AS ptd', 'p.id', 'ptd.project_id');
+  return db('Projects');
 }
 
 function findById(id) {
   return db('Projects')
     .where({ id })
     .first();
+}
+
+function findDeadlines() {
+  return db('ProjectsToDeadlines');
+}
+
+function findDeadlinesById(id) {
+  return db('ProjectsToDeadlines AS ptd')
+    .where({ 'ptd.project_id': id })
+    .select('ptd.deadline_type', 'ptd.deadline');
 }
 
 async function add(project) {

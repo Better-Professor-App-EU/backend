@@ -22,7 +22,23 @@ router.get('/:id', (req, res) => {
         res.status(200).json(student);
       } else {
         res.status(401).json({
-          message: `There is no student with an id of ${id}`,
+          message: `There is no student with an id of ${id}.`,
+        });
+      }
+    })
+    .catch(err => genericError(err, req, res));
+});
+
+router.get('/:id/projects', (req, res) => {
+  const { id } = req.params;
+
+  Students.findProjectsById(id)
+    .then(projects => {
+      if (projects && projects.length > 0) {
+        res.status(200).json(projects);
+      } else {
+        res.status(401).json({
+          messages: `There are no projects associated with the student id ${id}.`,
         });
       }
     })

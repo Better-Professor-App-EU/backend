@@ -3,6 +3,7 @@ const db = require('../../config/db-config');
 module.exports = {
   find,
   findById,
+  findByUserId,
   add,
   remove
 }
@@ -15,6 +16,12 @@ function findById(id) {
   return db('Messages')
     .where({ id })
     .first();
+}
+
+function findByUserId(user_id) {
+  return db('Messages')
+    .where({ user_id })
+    .select('student_id', 'text', 'send_to_self', 'timestamp');
 }
 
 async function add(message) {

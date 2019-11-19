@@ -6,10 +6,15 @@ const { genericError } = require('../helpers/helpers');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  Messages.find()
+  const user_id = req.decodedToken.sub;
+
+  Messages.findByUserId(user_id)
     .then(messages => {
       if (messages && messages.length > 0) {
-        res.status(200).json(messages);
+        const messagesToSend = messages.map(message => {
+          return { ...message, send_to_self: message.send_to_self == true }
+        });
+        res.status(200).json(messagesToSend);
       } else {
         res.status(401).json({
           message: 'There are no messages in the database.'

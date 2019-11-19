@@ -24,6 +24,23 @@ router.get('/', (req, res) => {
     .catch(err => genericError(err, req, res));
 });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+
+  Messages.findByStudentId(id)
+    .then(messages => {
+      if (messages && messages.length > 0) {
+        res.status(200).json(messages);
+      } else {
+        res.status(401).json({
+          message: `Either there is no student in the database with an id of ${id},`
+            + ` or ${req.decodedToken.username} hasn't sent that student any messages!`,
+        });
+      }
+    })
+    .catch(err => genericError(err, req, res));
+})
+
 router.post('/', (req, res) => {
   const user_id = req.decodedToken.sub;
   const { student_id, text, send_to_self } = req.body;

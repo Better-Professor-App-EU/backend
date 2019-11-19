@@ -4,6 +4,7 @@ module.exports = {
   find,
   findById,
   findByUserId,
+  findByStudentId,
   add,
   remove
 }
@@ -21,7 +22,24 @@ function findById(id) {
 function findByUserId(user_id) {
   return db('Messages')
     .where({ user_id })
-    .select('student_id', 'text', 'send_to_self', 'timestamp');
+    .select(
+      'id AS message_id',
+      'student_id',
+      'text',
+      'send_to_self',
+      'timestamp'
+    );
+}
+
+async function findByStudentId(student_id) {
+  return db('Messages')
+    .where({ student_id })
+    .select(
+      'id AS message_id',
+      'text',
+      'send_to_self',
+      'timestamp'
+    );
 }
 
 async function add(message) {

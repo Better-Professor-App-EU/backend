@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Projects = require('./projects-model');
+const { genericError } = require('../helpers/helpers');
 
 const router = express.Router();
 
@@ -38,11 +39,7 @@ router.get('/', (req, res) => {
           });
         });
     })
-    .catch(err => {
-      res.status(500).json({
-        message: `Failed to Projects.find() in GET /projects: ${err.message}`,
-      });
-    });
+    .catch(err => genericError(err, req, res));
 });
 
 module.exports = router;

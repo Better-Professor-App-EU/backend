@@ -7,8 +7,10 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   const user_id = req.decodedToken.sub;
+  const { self } = req.query;
 
-  Messages.findByUserId(user_id)
+  if (!self) {
+    Messages.findByUserId(user_id)
     .then(messages => {
       if (messages && messages.length > 0) {
         const messagesToSend = messages.map(message => {
@@ -22,6 +24,19 @@ router.get('/', (req, res) => {
       }
     })
     .catch(err => genericError(err, req, res));
+  } else {
+    Messages.findBySelf(user_id)
+    .then(messages => {
+      if (messages && messages.length > 0) {
+        res.status(200).json(messages);
+      } else {
+        res.status(401).json({
+          message: `Hmm... looks like ${req.decodedToken.username} hasn't send any messages to self!`,
+        });
+      }
+    })
+    .catch(err => genericError(err, res, req));
+  }
 });
 
 router.get('/:id', (req, res) => {
@@ -39,7 +54,7 @@ router.get('/:id', (req, res) => {
       }
     })
     .catch(err => genericError(err, req, res));
-})
+});
 
 router.post('/', (req, res) => {
   const user_id = req.decodedToken.sub;

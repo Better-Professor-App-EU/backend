@@ -1,6 +1,7 @@
 const express = require('express');
 
 const Users = require('./users-model');
+const { genericError } = require('../helpers/helpers');
 
 const router = express.Router();
 
@@ -9,11 +10,7 @@ router.get('/', (req, res) => {
     .then(users => {
       res.status(200).json(users);
     })
-    .catch(err => {
-      res.status(500).json({
-        message: `Failed to GET /users: ${err.message}`,
-      });
-    });
+    .catch(err => genericError(err, req, res));
 });
 
 module.exports = router;

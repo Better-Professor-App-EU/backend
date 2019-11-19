@@ -18,7 +18,8 @@ function findById(id) {
 }
 
 async function add(message) {
-  const [id] = await db('Messages').insert(message, 'id');
+  const timestamp = JSON.stringify(new Date());
+  const [id] = await db('Messages').insert({ ...message, timestamp }, 'id');
 
   return db('Messages')
     .where({ id })

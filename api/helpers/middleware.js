@@ -18,7 +18,9 @@ function authenticate(req, res, next) {
       process.env.SECRET,
       (err, decodedToken) => {
         if (err) {
-          res.status(401).send(err.message);
+          res.status(401).json({
+            message: err.message
+          });
         } else {
           req.decodedToken = decodedToken;
           next();
@@ -27,7 +29,7 @@ function authenticate(req, res, next) {
     );
   } else {
     res.status(401).json({
-      message: 'Invalid credentials. Please sign in.',
+      message: 'Invalid credentials. Please provide a valid token.',
      });
   }
 }

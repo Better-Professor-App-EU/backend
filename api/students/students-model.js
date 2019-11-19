@@ -37,7 +37,7 @@ async function add(student) {
 async function remove(id) {
   const student = await findById(id);
 
-  db('Students')
+  await db('Students')
     .where({ id })
     .del();
 

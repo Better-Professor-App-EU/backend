@@ -49,11 +49,30 @@ router.post('/', (req, res) => {
   Students.add(req.body)
     .then(student => {
       res.status(201).json({
-        message: 'Successfully created student.',
+        message: 'Successfully created student!',
         student,
       });
     })
     .catch(err => genericError(err, req, res));
 });
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  Students.remove(id)
+    .then(student => {
+      if (student) {
+        res.status(200).json({
+          message: `Successfully deleted student with id of ${id}!`,
+          student,
+        });
+      } else {
+        res.status(401).json({
+          message: `There is no student with an id of ${id}`,
+        });
+      }
+    })
+    .catch(err => genericError(err, res, req));
+})
 
 module.exports = router;

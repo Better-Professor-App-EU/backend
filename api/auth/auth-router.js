@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const Users = require('../users/users-model');
-const { genericError, generateToken } = require('../helpers/middleware');
+const { genericError, generateToken } = require('../helpers/helpers');
 
 const router = express.Router();
 
@@ -29,8 +29,14 @@ router.post('/login', (req, res) => {
           message: `Welcome ${user.username}!`,
           token: token,
         });
+      } else if (user) {
+        res.status(403).json({
+          message: 'Incorrect password.',
+        });
       } else {
-        res.status(401).send('Invalid credentials.');
+        res.status(401).json({
+          message: 'Invalid credentials.',
+        });
       }
     })
     .catch(err => genericError(err, req, res));

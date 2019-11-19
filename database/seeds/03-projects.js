@@ -1,7 +1,5 @@
 
 exports.seed = function(knex) {
-  return knex('Projects').truncate()
-    .then(function () {
       return knex('Projects').insert([
         {id: 1, name: 'Letter of Recommendation'},
         {id: 2, name: 'Feedback on Popper Essay'},
@@ -10,5 +8,4 @@ exports.seed = function(knex) {
         {id: 5, name: 'Give Stern Talking To'},
         {id: 6, name: 'Notify of Department Prize Nomination'}
       ]);
-    });
 };

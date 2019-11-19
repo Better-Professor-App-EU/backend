@@ -1,7 +1,5 @@
 
 exports.seed = function(knex) {
-  return knex('ProjectsToDeadlines').truncate()
-    .then(function () {
       return knex('ProjectsToDeadlines').insert([
         {project_id: 1, deadline_type: 'draft', deadline: JSON.stringify(new Date('2019-11-30'))},
         {project_id: 1, deadline_type: 'redraft', deadline: JSON.stringify(new Date('2020-01-05'))},
@@ -13,5 +11,4 @@ exports.seed = function(knex) {
         {project_id: 5, deadline_type: 'latest by', deadline: JSON.stringify(new Date('2019-11-20'))},
         {project_id: 6, deadline_type: 'latest', deadline: JSON.stringify(new Date('2019-12-31'))},
       ]);
-    });
 };

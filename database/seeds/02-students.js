@@ -1,7 +1,5 @@
 
 exports.seed = function(knex) {
-  return knex('Students').truncate()
-    .then(function () {
       return knex('Students').insert([
         {id: 1, name: 'Mickey The Drink'},
         {id: 2, name: 'Steve Bytheway'},
@@ -12,5 +10,4 @@ exports.seed = function(knex) {
         {id: 7, name: 'John Caramel'},
         {id: 8, name: 'Ron Waffle'}
       ]);
-    });
 };

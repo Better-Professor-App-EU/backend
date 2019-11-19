@@ -1,7 +1,5 @@
 
 exports.seed = function(knex) {
-  return knex('Messages').truncate()
-    .then(function () {
       return knex('Messages').insert([
         {id: 1, user_id: 1, student_id: 1, text: "TEST. TEST! DO YOU READ ME? TEST.", send_to_self: '1', timestamp: JSON.stringify(new Date())},
         {id: 2, user_id: 1, student_id: 2, text: "Roger roger.", send_to_self: '0', timestamp: JSON.stringify(new Date())},
@@ -15,5 +13,4 @@ exports.seed = function(knex) {
         {id: 10, user_id: 3, student_id: 8, text: "URGENT ACTION REQUIRED!!!", send_to_self: '0', timestamp: JSON.stringify(new Date())},
         {id: 11, user_id: 3, student_id: 8, text: "Scratch that. All good!", send_to_self: '0', timestamp: JSON.stringify(new Date())}
       ]);
-    });
 };

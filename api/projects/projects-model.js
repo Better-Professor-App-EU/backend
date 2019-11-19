@@ -8,7 +8,8 @@ module.exports = {
 }
 
 function find() {
-  return db('Projects');
+  return db('Projects AS p')
+    .join('ProjetsToDeadlines AS ptd', 'p.id', 'ptd.project_id');
 }
 
 function findById(id) {

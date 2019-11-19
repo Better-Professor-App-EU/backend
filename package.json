@@ -24,6 +24,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
+    "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.20.0",
@@ -34,10 +35,9 @@
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
-    "jest": "^24.9.0",
-    "supertest": "^4.0.2",
-    "cross-env": "^6.0.3",
     "eslint": "^6.6.0",
-    "nodemon": "^1.19.4"
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.4",
+    "supertest": "^4.0.2"
   }
 }

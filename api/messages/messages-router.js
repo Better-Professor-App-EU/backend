@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   const user_id = req.decodedToken.sub;
   const { self } = req.query;
 
-  if (!self) {
+  if (self !== 'true') {
     Messages.findByUserId(user_id)
     .then(messages => {
       if (messages && messages.length > 0) {

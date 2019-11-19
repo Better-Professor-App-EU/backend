@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
         res.status(200).json(messagesToSend);
       } else {
         res.status(401).json({
-          message: 'There are no messages in the database.'
+          message: `Hmm... looks like ${req.decodedToken.username} hasn't sent any messages!`
         });
       }
     })

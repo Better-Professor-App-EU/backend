@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
       res.status(500).json({
-        message: `Failed to GET /api/students: ${err.message}`,
+        message: `Failed to GET /students: ${err.message}`,
       });
     });
 });

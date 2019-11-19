@@ -8,20 +8,20 @@ module.exports = {
 }
 
 function find() {
-  return db('users');
+  return db('Users');
 }
 
 
 function findById(id) {
-  return db('users')
+  return db('Users')
     .where({ id })
     .first();
 }
 
 async function add(user) {
-  const [id] = await db('users').insert(user, 'id');
+  const [id] = await db('Users').insert(user, 'id');
 
-  return db('users')
+  return db('Users')
     .where({ id })
     .first();
 }
@@ -29,7 +29,7 @@ async function add(user) {
 async function remove(id) {
   const quote = await findById(id);
 
-  db('users')
+  db('Users')
     .where({ id })
     .del();
 

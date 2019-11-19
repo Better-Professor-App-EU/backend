@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
   const user_id = req.decodedToken.sub;
   const { student_id, text, send_to_self } = req.body;
 
-  if (student_id === null && (send_to_self === null || !send_to_self)) {
+  if (student_id === null && !send_to_self) {
     res.status(400).json({
       message: 'Poorly formed request body: at least one of student_id and send_to_self must be truthy.',
     });
@@ -37,6 +37,6 @@ router.post('/', (req, res) => {
       })
       .catch(err => genericError(err, req, res));
   }
-})
+});
 
 module.exports = router;

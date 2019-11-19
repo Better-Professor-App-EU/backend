@@ -17,7 +17,7 @@ server.use(cors());
 server.use('/', logger);
 server.use('/users', usersRouter);
 server.use('/students', studentsRouter);
-server.user('/projects', projectsRouter);
+server.use('/projects', projectsRouter);
 
 server.get('/', (req, res) => {
   res.send("<h2>We're in business!<h2>");

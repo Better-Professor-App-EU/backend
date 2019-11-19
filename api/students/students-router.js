@@ -43,6 +43,17 @@ router.get('/:id/projects', (req, res) => {
       }
     })
     .catch(err => genericError(err, req, res));
-})
+});
+
+router.post('/', (req, res) => {
+  Students.add(req.body)
+    .then(student => {
+      res.status(201).json({
+        message: 'Successfully created student.',
+        student,
+      });
+    })
+    .catch(err => genericError(err, req, res));
+});
 
 module.exports = router;

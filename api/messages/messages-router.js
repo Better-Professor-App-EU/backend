@@ -17,6 +17,6 @@ router.get('/', (req, res) => {
       }
     })
     .catch(err => genericError(err, req, res));
-})
+});
 
 module.exports = router;

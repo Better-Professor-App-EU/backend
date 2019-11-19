@@ -9,6 +9,7 @@ const { logger } = require('./helpers/middleware');
 const usersRouter = require('./users/users-router');
 const studentsRouter = require('./students/students-router');
 const projectsRouter = require('./projects/projects-router');
+const messagesRouter = require('./messages/messages-router');
 
 server.use(helmet());
 server.use(express.json());
@@ -18,6 +19,7 @@ server.use('/', logger);
 server.use('/users', usersRouter);
 server.use('/students', studentsRouter);
 server.use('/projects', projectsRouter);
+server.use('/messages', messagesRouter);
 
 server.get('/', (req, res) => {
   res.send("<h2>We're in business!<h2>");

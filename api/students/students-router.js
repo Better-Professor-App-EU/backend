@@ -8,7 +8,13 @@ const router = express.Router();
 router.get('/', (req, res) => {
   Students.find()
     .then(students => {
-      res.status(200).json(students);
+      if (students && students.length > 1) {
+        res.status(200).json(students);
+      } else {
+        res.status(401).json({
+          message: 'There are no students in the database.'
+        });
+      }
     })
     .catch(err => genericError(err, req, res));
 });

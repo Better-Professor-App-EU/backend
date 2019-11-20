@@ -24,7 +24,7 @@ function findByUserId(user_id) {
   return db('Messages')
     .where({ user_id })
     .select(
-      'id AS message_id',
+      'id',
       'student_id',
       'text',
       'send_to_self',

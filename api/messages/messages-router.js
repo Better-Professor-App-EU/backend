@@ -45,7 +45,10 @@ router.get('/:id', (req, res) => {
   Messages.findByStudentId(id)
     .then(messages => {
       if (messages && messages.length > 0) {
-        res.status(200).json(messages);
+        const messagesToSend = messages.map(message => {
+          return { ...message, send_to_self: message.send_to_self == true };
+        })
+        res.status(200).json(messagesToSend);
       } else {
         res.status(401).json({
           message: `Either there is no student in the database with an id of ${id},`

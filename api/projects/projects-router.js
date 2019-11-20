@@ -29,8 +29,10 @@ router.get('/', (req, res) => {
                 })
               }
             });
-
+            
             res.status(200).json(projectsWithDeadlines);
+          } else if (deadlines) {
+            res.status(200).json(projects);
           }
         })
         .catch(err => {

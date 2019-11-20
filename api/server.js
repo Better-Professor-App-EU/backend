@@ -20,8 +20,8 @@ server.use('/', logger);
 server.use('/auth', authRouter);
 server.use('/users', /* authenticate, */ usersRouter);
 server.use('/students', /* authenticate, */ studentsRouter);
-server.use('/projects',/*  authenticate, */ projectsRouter);
-server.use('/messages', /* authenticate,  */messagesRouter);
+server.use('/projects', /* authenticate, */ projectsRouter);
+server.use('/messages', /* authenticate, */ messagesRouter);
 
 server.get('/', (req, res) => {
   res.send("<h2>We're in business!<h2>");

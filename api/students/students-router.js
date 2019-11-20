@@ -1,7 +1,7 @@
 const express = require('express');
 
 const Students = require('./students-model');
-const { genericError } = require('../helpers/helpers');
+const { genericError, getDeadlines } = require('../helpers/helpers');
 
 const router = express.Router();
 
@@ -41,13 +41,14 @@ router.get('/:id/projects', (req, res) => {
   Students.findProjectsById(id)
     .then(projects => {
       if (projects && projects.length > 0) {
-        res.status(200).json(projects);
+        return projects;
       } else {
         res.status(401).json({
           messages: `There are no projects associated with the student id ${id}.`,
         });
       }
     })
+    .then(projects => getDeadlines(projects, req, res))
     .catch(err => genericError(err, req, res));
 });
 

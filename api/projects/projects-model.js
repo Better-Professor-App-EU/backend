@@ -19,7 +19,14 @@ function findById(id) {
     .first();
 }
 
-function findDeadlines() {
+function findDeadlines(student_id) {
+  if (student_id) {
+    return db('ProjectsToDeadlines AS ptd')
+      .join('Projects AS p', 'p.id', 'ptd.project_id')
+      .join('Students&Projects AS s&p', 's&p.project_id', 'p.id')
+      .where({ 's&p.student_id': student_id });
+  }
+
   return db('ProjectsToDeadlines');
 }
 

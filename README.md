@@ -20,3 +20,5 @@ Some notes:
       const stringifiedDateObject = /* `timestamp` or `deadline` */;
       const dateObject = new Date(JSON.parse(stringifiedDateObject));
     ```
+
+DOCS FOR DEPLOYED API: https://documenter.getpostman.com/view/8697138/SW7aX7qz?version=latest

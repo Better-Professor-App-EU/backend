@@ -70,9 +70,11 @@ router.post('/', (req, res) => {
   } else {
     Messages.add({ user_id, student_id, text, send_to_self: send_to_self == true })
       .then(message => {
+        const messageToSend = { ...message, send_to_self: send_to_self == true };
+        
         res.status(201).json({
           message: 'Successfully created message.',
-          new_message: message,
+          new_message: messageToSend,
         });
       })
       .catch(err => genericError(err, req, res));

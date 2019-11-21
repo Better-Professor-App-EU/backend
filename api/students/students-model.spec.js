@@ -3,7 +3,11 @@ const db = require('../../config/db-config');
 const Students = require('./students-model');
 
 beforeAll(async () => {
+  await db('Messages').truncate();
+  await db('ProjectsToDeadlines').truncate();
   await db('Students&Projects').truncate();
+  await db('Users&Students').truncate();
+
   await db('Students').truncate();
 });
 
@@ -75,7 +79,7 @@ describe('students-model', () => {
       const student = await Students.findProjectsById(3);
       expect(student).toEqual([]);
     });
-  })
+  });
 
   describe('remove(id)', () => {
     it('should remove and return the student with the given id', async () => {

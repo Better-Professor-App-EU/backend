@@ -47,7 +47,7 @@ async function add(project) {
 async function remove(id) {
   const project = await findById(id);
 
-  db('Projects')
+  await db('Projects')
     .where({ id })
     .del();
 

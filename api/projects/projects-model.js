@@ -1,12 +1,20 @@
 const db = require('../../config/db-config');
 
 module.exports = {
+  add,
   find,
   findById,
   findDeadlines,
   findDeadlinesById,
-  add,
   remove
+}
+
+async function add(project) {
+  const [id] = await db('Projects').insert(project, 'id');
+
+  return db('Projects')
+    .where({ id })
+    .first();
 }
 
 function find() {
@@ -36,18 +44,10 @@ function findDeadlinesById(id) {
     .select('ptd.deadline_type', 'ptd.deadline');
 }
 
-async function add(project) {
-  const [id] = await db('Projects').insert(project, 'id');
-
-  return db('Projects')
-    .where({ id })
-    .first();
-}
-
 async function remove(id) {
   const project = await findById(id);
 
-  db('Projects')
+  await db('Projects')
     .where({ id })
     .del();
 

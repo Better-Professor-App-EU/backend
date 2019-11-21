@@ -66,7 +66,7 @@ async function add(message) {
 async function remove(id) {
   const message = await findById(id);
 
-  db('Messages')
+  await db('Messages')
     .where({ id })
     .del();
 

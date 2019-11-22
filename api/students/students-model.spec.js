@@ -3,10 +3,11 @@ const db = require('../../config/db-config');
 const Students = require('./students-model');
 
 beforeAll(async () => {
+  await db('Users&Students').truncate();
+  await db('Students&Projects').truncate();
   await db('Messages').truncate();
   await db('ProjectsToDeadlines').truncate();
-  await db('Students&Projects').truncate();
-  await db('Users&Students').truncate();
+  await db('Projects').truncate();
 
   await db('Students').truncate();
 });
@@ -71,8 +72,7 @@ describe('students-model', () => {
       expect(projects[0]).toEqual({ id: 1, name: 'testProject1' });
 
       // To ensure the next test doesn't break foreign key constraints:
-      await db('Students&Projects').truncate();
-      await db('Projects').truncate(); // (<-- And for tidiness!)
+      await db ('Students&Projects').where({ student_id: 1 }).del();
     });
 
     it('should return an empty array if the given id is invalid', async () => {

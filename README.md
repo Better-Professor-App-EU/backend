@@ -21,4 +21,6 @@ Some notes:
       const dateObject = new Date(JSON.parse(stringifiedDateObject));
     ```
 
+DEPLOYED API: https://bw-better-professor-app-cmp.herokuapp.com/
+
 DOCS FOR DEPLOYED API: https://documenter.getpostman.com/view/8697138/SW7aX7qz?version=latest

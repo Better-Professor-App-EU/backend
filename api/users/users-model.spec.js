@@ -91,7 +91,7 @@ describe('users-model', () => {
       users = await db('Users');
       expect(users).toHaveLength(0);
     });
-    
+
     it('should return _undefined_ if an invalid id is supplied', async () => {
       const user = await Users.remove(3);
       expect(user).toEqual(undefined);
